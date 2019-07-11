@@ -13,7 +13,7 @@ class BrandsController extends AbstractController
         $brands = $repository->findAll();
 
         return $this->render(
-            'brands.html.twig',
+            'shop/brands.html.twig',
             [
                 'brands' => $brands,
             ]
