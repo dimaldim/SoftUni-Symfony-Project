@@ -21,6 +21,14 @@ class LoginListener
         $user = $event->getAuthenticationToken()->getUser();
         $user->setLastLogin(new \DateTime());
         $user->setLastIp($request->getClientIp());
+        $userAgentStart = strpos($request->headers->get('User-Agent'), '(') + 1;
+        $user->setUserAgent(
+            substr(
+                $request->headers->get('User-Agent'),
+                $userAgentStart,
+                strpos($request->headers->get('User-Agent'), ')') - $userAgentStart
+            )
+        );
         $this->em->persist($user);
         $this->em->flush();
     }
