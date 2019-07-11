@@ -152,4 +152,9 @@ class Products
             $this->setDateAdded(new \DateTime('now'));
         }
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
