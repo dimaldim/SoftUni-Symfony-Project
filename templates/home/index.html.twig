@@ -154,5 +154,5 @@
             </div>
         </div>
     </div> <!-- End promo area -->
-    {% include('brands.html.twig') %}
+    {{ render(controller('App\\Controller\\BrandsController::getBrands')) }}
 {% endblock %}
