@@ -8,7 +8,7 @@
                     <div class="product-hover">
                         <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
                             cart</a>
-                        <a href="#" class="view-details-link"><i
+                        <a href="{{ path('view_product', {'slug': product.slug}) }}" class="view-details-link"><i
                                     class="fa fa-link"></i> See details</a>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
 
                 <div class="product-carousel-price">
                     <ins>${{ product.price }}</ins>
-{#                    <del>$100.00</del>#}
+                    {#                    <del>$100.00</del>#}
                 </div>
             </div>
         {% endfor %}
