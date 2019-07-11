@@ -69,12 +69,12 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
-        if (!$user->getIsActive()) {
-            throw new CustomUserMessageAuthenticationException('Your account has been suspended.');
-        }
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
+        }
+        if (!$user->getIsActive()) {
+            throw new CustomUserMessageAuthenticationException('Your account has been suspended.');
         }
 
         return $user;
@@ -90,6 +90,7 @@ class AppCustomAuthenticator extends AbstractFormLoginAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
+
         return new RedirectResponse($this->urlGenerator->generate('homepage'));
     }
 
