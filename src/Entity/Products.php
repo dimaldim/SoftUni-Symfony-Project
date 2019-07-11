@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductsRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Products
 {
@@ -140,5 +141,15 @@ class Products
         $this->slug = $slug;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function updatedTimestamps(): void
+    {
+        if ($this->getDateAdded() === null) {
+            $this->setDateAdded(new \DateTime('now'));
+        }
     }
 }
