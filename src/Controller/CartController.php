@@ -33,29 +33,19 @@ class CartController extends AbstractController
 
         return new JsonResponse(
             [
-                'data' => $cart = $session->get('shopping_cart'),
+                'data' => $session->get('shopping_cart'),
             ]
         );
     }
 
-    public function getHeaderCartInfo()
+    public function getHeaderCartInfo(CartService $cartService)
     {
-        $session = new Session();
-        $cart = $session->get('shopping_cart');
-        $totalItems = 0;
-        $totalPrice = 0.00;
-        if ($cart) {
-            foreach ($cart as $key => $value) {
-                $totalItems += $cart[$key]['qty'];
-                $totalPrice += $cart[$key]['price'] * $cart[$key]['qty'];
-            }
-        }
 
         return $this->render(
             'cart.html.twig',
             [
-                'totalItems' => $totalItems,
-                'totalPrice' => $totalPrice,
+                'totalItems' => $cartService->getCartHeaderInfo()['totalItems'],
+                'totalPrice' => $cartService->getCartHeaderInfo()['totalPrice'],
             ]
         );
     }
