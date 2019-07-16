@@ -109,6 +109,12 @@ jQuery(document).ready(function ($) {
           title: "Success:",
           message: "The product <b>" + data[productId]['productName'] + "</b> has been added to your shopping cart."
         }, {type: 'success'});
+      },
+      error: (data) => {
+        $.notify({
+          title: "Warning:",
+          message: "Something went wrong! <b>" + data.responseJSON.error + "</b>"
+        }, {type: 'danger'});
       }
     })
   });
