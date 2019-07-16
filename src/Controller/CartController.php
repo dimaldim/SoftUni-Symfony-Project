@@ -23,7 +23,7 @@ class CartController extends AbstractController
             return new JsonResponse(
                 [
                     'error' => 'No product found.',
-                ]
+                ], 404
             );
         }
         $session = new Session();
