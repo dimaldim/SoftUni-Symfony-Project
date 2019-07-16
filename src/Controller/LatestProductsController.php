@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Shop;
+namespace App\Controller;
 
 use App\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +14,7 @@ class LatestProductsController extends AbstractController
         $latestProducts = $repository->findBy([], ['dateAdded' => 'desc'], $limit);
 
         return $this->render(
-            'shop/latest_products.html.twig',
+            'latest_products.html.twig',
             [
                 'products' => $latestProducts,
             ]

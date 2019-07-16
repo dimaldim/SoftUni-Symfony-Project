@@ -1,7 +1,7 @@
 <div class="header-area">
     <div class="container">
         <div class="row">
-            {% include('shop/header_menu.html.twig') %}
+            {% include('header_menu.html.twig') %}
         </div>
     </div>
 </div> <!-- End header area -->
@@ -10,10 +10,10 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="logo">
-                    <h1><a href="..">MD Shop</a></h1>
+                    <h1><a href="">MD Shop</a></h1>
                 </div>
             </div>
-            {{ render(controller('App\\Controller\\Shop\\CartController::getHeaderCartInfo')) }}
+            {{ render(controller('App\\Controller\\CartController::getHeaderCartInfo')) }}
         </div>
     </div>
 </div> <!-- End site branding area -->
@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            {{ include('shop/navbar.html.twig') }}
+            {{ include('navbar.html.twig') }}
         </div>
     </div>
 </div> <!-- End mainmenu area -->

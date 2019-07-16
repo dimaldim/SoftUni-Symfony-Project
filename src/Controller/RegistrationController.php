@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Shop;
+namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
@@ -51,7 +51,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render(
-            'shop/registration/register.html.twig',
+            'registration/register.html.twig',
             [
                 'registrationForm' => $form->createView(),
             ]

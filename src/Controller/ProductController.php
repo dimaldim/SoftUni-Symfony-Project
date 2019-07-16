@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Shop;
+namespace App\Controller;
 
 use App\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +17,7 @@ class ProductController extends AbstractController
     public function viewProduct(Products $product)
     {
         return $this->render(
-            'shop/product/view.html.twig',
+            'product/view.html.twig',
             [
                 'product' => $product,
             ]

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Shop;
+namespace App\Controller;
 
 use App\Entity\Brands;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +13,7 @@ class BrandsController extends AbstractController
         $brands = $repository->findAll();
 
         return $this->render(
-            'shop/brands.html.twig',
+            'brands.html.twig',
             [
                 'brands' => $brands,
             ]

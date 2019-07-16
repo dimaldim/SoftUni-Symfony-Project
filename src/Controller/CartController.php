@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Shop;
+namespace App\Controller;
 
 use App\Entity\Products;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +61,7 @@ class CartController extends AbstractController
         }
 
         return $this->render(
-            'shop/cart.html.twig',
+            'cart.html.twig',
             [
                 'totalItems' => $totalItems,
                 'totalPrice' => $totalPrice,

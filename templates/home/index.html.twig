@@ -1,4 +1,4 @@
-{% extends 'shop/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %} - Home{% endblock %}
 
@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    {{ render(controller('App\\Controller\\Shop\\LatestProductsController::getLatestProducts', {'limit': 10})) }}
+                    {{ render(controller('App\\Controller\\LatestProductsController::getLatestProducts', {'limit': 10})) }}
                 </div>
             </div>
         </div>
@@ -44,5 +44,5 @@
             </div>
         </div>
     </div> <!-- End promo area -->
-    {{ render(controller('App\\Controller\\Shop\\BrandsController::getBrandsAction')) }}
+    {{ render(controller('App\\Controller\\BrandsController::getBrandsAction')) }}
 {% endblock %}
