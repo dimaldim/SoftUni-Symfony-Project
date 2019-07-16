@@ -13,10 +13,10 @@
                     </div>
                 </div>
 
-                <h2><a href="#">{{ product.name }}</a></h2>
+                <h2><a href="{{ path('view_product', {'slug': product.slug}) }}">{{ product.name }}</a></h2>
 
                 <div class="product-carousel-price">
-                    <ins>${{ product.price }}</ins>
+                    <ins>${{ product.price|number_format(2, '.', '') }}</ins>
                     {#                    <del>$100.00</del>#}
                 </div>
             </div>
