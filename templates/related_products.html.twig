@@ -1,0 +1,24 @@
+<div class="related-products-wrapper">
+    <h2 class="related-products-title">Related Products</h2>
+    <div class="related-products-carousel">
+        {% for product in products %}
+            <div class="single-product">
+                <div class="product-f-image">
+                    <img src="{{ asset(product.img) }}" alt="">
+                    <div class="product-hover">
+                        <a href="" class="add-to-cart-link" data-product-id="{{ product.id }}"><i class="fa fa-shopping-cart"></i> Add
+                            to cart</a>
+                        <a href="{{ path('view_product', {slug: product.slug }) }}" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                    </div>
+                </div>
+
+                <h2><a href="{{ path('view_product', {slug: product.slug }) }}">{{ product.name }}</a></h2>
+
+                <div class="product-carousel-price">
+                    <ins>${{ product.price|number_format(2,'.','') }}</ins>
+                    {#                <del>$100.00</del>#}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
