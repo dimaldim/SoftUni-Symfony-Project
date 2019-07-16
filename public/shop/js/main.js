@@ -108,13 +108,28 @@ jQuery(document).ready(function ($) {
         $.notify({
           title: "Success:",
           message: "The product <b>" + data[productId]['productName'] + "</b> has been added to your shopping cart."
-        }, {type: 'success'});
+        }, {
+          type: 'success',
+          animate:
+            {
+              enter: 'animated bounceIn',
+              exit: 'animated bounceOut'
+            }
+        });
       },
       error: (data) => {
         $.notify({
-          title: "Warning:",
-          message: "Something went wrong! <b>" + data.responseJSON.error + "</b>"
-        }, {type: 'danger'});
+            title: "Warning:",
+            message: "Something went wrong! <b>" + data.responseJSON.error + "</b>"
+          }, {
+            type: 'danger',
+            animate:
+              {
+                enter: 'animated bounceIn',
+                exit: 'animated bounceOut'
+              }
+          }
+        );
       }
     })
   });
