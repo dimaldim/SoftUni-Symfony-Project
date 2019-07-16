@@ -13,13 +13,7 @@
                     <h1><a href="..">MD Shop</a></h1>
                 </div>
             </div>
-
-            <div class="col-sm-6">
-                <div class="shopping-item">
-                    <a href="cart.html">Cart - <span class="cart-amunt">$0.00</span> <i class="fa fa-shopping-cart"></i>
-                        <span class="product-count">0</span></a>
-                </div>
-            </div>
+            {{ render(controller('App\\Controller\\Shop\\CartController::getHeaderCartInfo')) }}
         </div>
     </div>
 </div> <!-- End site branding area -->
