@@ -12,6 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
+    private $cartService;
+
+    public function __construct(CartService $cartService)
+    {
+        $this->cartService = $cartService;
+    }
+
     /**
      * @Route("/cart/add/{id}/{qty}", name="cart_add_product")
      * @param CartService $cartService
@@ -19,7 +26,7 @@ class CartController extends AbstractController
      * @param $qty
      * @return Response
      */
-    public function addToCart(CartService $cartService, Products $product = null, $qty)
+    public function addToCart(Products $product = null, $qty)
     {
         if ($product == null) {
             return new JsonResponse(
@@ -29,7 +36,7 @@ class CartController extends AbstractController
             );
         }
         $session = new Session();
-        $cartService->addToCart($product, $qty);
+        $this->cartService->addToCart($product, $qty);
 
         return new JsonResponse(
             [
@@ -38,14 +45,13 @@ class CartController extends AbstractController
         );
     }
 
-    public function getHeaderCartInfo(CartService $cartService)
+    public function getHeaderCartInfo()
     {
-
         return $this->render(
             'cart.html.twig',
             [
-                'totalItems' => $cartService->getCartHeaderInfo()['totalItems'],
-                'totalPrice' => $cartService->getCartHeaderInfo()['totalPrice'],
+                'totalItems' => $this->cartService->getCartHeaderInfo()['totalItems'],
+                'totalPrice' => $this->cartService->getCartHeaderInfo()['totalPrice'],
             ]
         );
     }
