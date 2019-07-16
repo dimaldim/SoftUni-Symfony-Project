@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Products;
+use App\Service\CartService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +14,12 @@ class CartController extends AbstractController
 {
     /**
      * @Route("/cart/add/{id}/{qty}", name="cart_add_product")
+     * @param CartService $cartService
      * @param Products $product
      * @param $qty
      * @return Response
      */
-    public function addToCart(Products $product = null, $qty)
+    public function addToCart(CartService $cartService, Products $product = null, $qty)
     {
         if ($product == null) {
             return new JsonResponse(
@@ -27,18 +29,7 @@ class CartController extends AbstractController
             );
         }
         $session = new Session();
-        $cart = $session->get('shopping_cart');
-        if (isset($cart[$product->getId()])) {
-            $cart[$product->getId()]['qty'] += $qty;
-        } else {
-            $cart[$product->getId()] = [
-                'productName' => $product->getName(),
-                'price' => $product->getPrice(),
-                'qty' => $qty,
-            ];
-        }
-        $session->set('shopping_cart', $cart);
-
+        $cartService->addToCart($product, $qty);
 
         return new JsonResponse(
             [
