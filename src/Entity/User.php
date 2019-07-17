@@ -74,6 +74,11 @@ class User implements UserInterface
      */
     private $userAgent;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fullName;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
@@ -104,20 +109,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string)$this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $stringRoles = [];
-        foreach ($this->roles as $role) {
-            /** @var $role Role */
-            $stringRoles[] = $role->getRole();
-        }
-
-        return $stringRoles;
     }
 
     /**
@@ -185,25 +176,6 @@ class User implements UserInterface
     /**
      * @return DateTimeInterface|null
      */
-    public function getCreatedAt(): ?DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param DateTimeInterface $createdAt
-     * @return User
-     */
-    public function setCreatedAt(DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTimeInterface|null
-     */
     public function getLastModified(): ?DateTimeInterface
     {
         return $this->lastModified;
@@ -230,6 +202,25 @@ class User implements UserInterface
         if ($this->getCreatedAt() === null) {
             $this->setCreatedAt(new DateTime('now'));
         }
+    }
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTimeInterface $createdAt
+     * @return User
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -289,8 +280,44 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isAdmin()
     {
         return in_array('ROLE_ADMIN', $this->getRoles());
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $stringRoles = [];
+        foreach ($this->roles as $role) {
+            /** @var $role Role */
+            $stringRoles[] = $role->getRole();
+        }
+
+        return $stringRoles;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    /**
+     * @param string $fullName
+     * @return User
+     */
+    public function setFullName(string $fullName): self
+    {
+        $this->fullName = $fullName;
+
+        return $this;
     }
 }
