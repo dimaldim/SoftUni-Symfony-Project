@@ -34,16 +34,26 @@ class Role
         $this->users = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Role
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -51,7 +61,16 @@ class Role
         return $this;
     }
 
-    function getRole() {
+    /**
+     * @return string|null
+     */
+    function getRole()
+    {
+        return $this->getName();
+    }
+
+    public function __toString()
+    {
         return $this->getName();
     }
 }
