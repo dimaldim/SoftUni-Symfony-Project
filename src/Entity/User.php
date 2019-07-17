@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,9 +29,14 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role")
+     * @ORM\JoinTable(name="users_roles",
+     *          joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *          inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     *          )
      */
-    private $roles = [];
+    private $roles;
 
     /**
      * @var string The hashed password
@@ -66,6 +74,11 @@ class User implements UserInterface
      */
     private $userAgent;
 
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,16 +111,22 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $stringRoles = [];
+        foreach ($this->roles as $role) {
+            /** @var $role Role */
+            $stringRoles[] = $role->getRole();
+        }
 
-        return array_unique($roles);
+        return $stringRoles;
     }
 
-    public function setRoles(array $roles): self
+    /**
+     * @param Role $role
+     * @return User
+     */
+    public function addRole(Role $role)
     {
-        $this->roles = $roles;
+        $this->roles[] = $role;
 
         return $this;
     }
@@ -144,11 +163,18 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsActive(): ?bool
     {
         return $this->isActive;
     }
 
+    /**
+     * @param bool $isActive
+     * @return User
+     */
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
@@ -156,24 +182,38 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * @param DateTimeInterface $createdAt
+     * @return User
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getLastModified(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getLastModified(): ?DateTimeInterface
     {
         return $this->lastModified;
     }
 
-    public function setLastModified(\DateTimeInterface $lastModified): self
+    /**
+     * @param DateTimeInterface $lastModified
+     * @return User
+     */
+    public function setLastModified(DateTimeInterface $lastModified): self
     {
         $this->lastModified = $lastModified;
 
@@ -186,17 +226,24 @@ class User implements UserInterface
      */
     public function updatedTimestamps(): void
     {
-        $this->setLastModified(new \DateTime('now'));
+        $this->setLastModified(new DateTime('now'));
         if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new \DateTime('now'));
+            $this->setCreatedAt(new DateTime('now'));
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function getLastIp(): ?string
     {
         return $this->lastIp;
     }
 
+    /**
+     * @param string|null $lastIp
+     * @return User
+     */
     public function setLastIp(?string $lastIp): self
     {
         $this->lastIp = $lastIp;
@@ -204,27 +251,46 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLastLogin(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getLastLogin(): ?DateTimeInterface
     {
         return $this->lastLogin;
     }
 
-    public function setLastLogin(?\DateTimeInterface $lastLogin): self
+    /**
+     * @param DateTimeInterface|null $lastLogin
+     * @return User
+     */
+    public function setLastLogin(?DateTimeInterface $lastLogin): self
     {
         $this->lastLogin = $lastLogin;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUserAgent(): ?string
     {
         return $this->userAgent;
     }
 
+    /**
+     * @param string|null $userAgent
+     * @return User
+     */
     public function setUserAgent(?string $userAgent): self
     {
         $this->userAgent = $userAgent;
 
         return $this;
+    }
+
+    public function isAdmin()
+    {
+        return in_array('ROLE_ADMIN', $this->getRoles());
     }
 }
