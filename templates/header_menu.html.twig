@@ -12,6 +12,9 @@
                 <li><a href="#"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
                 <li><a href="#"><i class="fa fa-shopping-cart"></i> Checkout</a></li>
                 <li><a href="{{ path('app_logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                {% if app.user.isAdmin() %}
+                    <li><a href="{{ path('easyadmin') }}"><i class="fa fa-user"></i> Admin panel</a></li>
+                {% endif %}
             {% endif %}
         </ul>
     </div>
