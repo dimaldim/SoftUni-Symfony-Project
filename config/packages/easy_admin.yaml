@@ -1,14 +1,42 @@
 easy_admin:
+    design:
+        menu:
+            - { label: 'Shop Home', route: 'homepage', icon: 'home' }
+            - { label: 'User Management' }
+            - { entity: 'Users', icon: 'user' }
+            - { label: 'Inventory' }
+            - Products
+            - Categories
+            - Brands
+    user:
+        name_property_path: 'fullName'
+        display_name: true
     entities:
         # List the entity class name you want to manage
         Users:
             class: App\Entity\User
         Products:
             class: App\Entity\Products
+            list:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'img', type: 'image' }
+                    - { property: 'category' }
+                    - { property: 'price' }
             form:
-                fields: ['name', 'img', 'brand', 'category', 'price', 'description']
+                fields: #['name', 'brand', 'category', 'price', 'description']
+                    - name
+                    - brand
+                    - category
+                    - price
+                    - { property: 'description', type: 'text_editor' }
         Categories:
             class: App\Entity\Categories
         Brands:
             class: App\Entity\Brands
+            list:
+                fields:
+                    - id
+                    - name
+                    - { property: 'img', type: 'image' }
 
