@@ -2,6 +2,7 @@
 
 namespace App\EventListener;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -19,7 +20,7 @@ class LoginListener
     {
         $request = Request::createFromGlobals();
         $user = $event->getAuthenticationToken()->getUser();
-        $user->setLastLogin(new \DateTime());
+        $user->setLastLogin(new DateTime());
         $user->setLastIp($request->getClientIp());
         $userAgentStart = strpos($request->headers->get('User-Agent'), '(') + 1;
         $user->setUserAgent(
