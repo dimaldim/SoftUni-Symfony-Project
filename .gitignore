@@ -8,6 +8,7 @@
 /vendor/
 /.idea/
 /src/Migrations/
+/node_modules/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
