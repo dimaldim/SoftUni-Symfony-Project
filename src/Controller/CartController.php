@@ -19,7 +19,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/add/{id}/{qty}", name="cart_add_product", methods={"POST"})
+     * @Route("/cart/add/{id}/{qty}", name="cart_add_product")
      * @param Products $product
      * @param $qty
      * @return JsonResponse
@@ -43,14 +43,17 @@ class CartController extends AbstractController
         );
     }
 
-    public function getHeaderCartInfo()
+    /**
+     * @Route("/cart/get")
+     * @return JsonResponse
+     */
+    public function getShoppingCart()
     {
-        return $this->render(
-            'cart.html.twig',
+        return new JsonResponse(
             [
-                'totalItems' => $this->cartService->getCartHeaderInfo()['totalItems'],
-                'totalPrice' => $this->cartService->getCartHeaderInfo()['totalPrice'],
-                'products' => $this->cartService->getCartHeaderInfo()['products'],
+                'totalItems' => $this->cartService->getShoppingCartInfo()['totalItems'],
+                'totalPrice' => $this->cartService->getShoppingCartInfo()['totalPrice'],
+                'products' => $this->cartService->getShoppingCartInfo()['products'],
             ]
         );
     }

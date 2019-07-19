@@ -18,10 +18,12 @@
 </head>
 <body>
 <div class="super_container">
-    {% include('header.html.twig') %}
-    {% include('header_menu.html.twig') %}
-    {% block body %}
-    {% endblock %}
+    <div id="app">
+        {% include('header.html.twig') %}
+        {% include('header_menu.html.twig') %}
+        {% block body %}
+        {% endblock %}
+    </div>
     {% include('footer.html.twig') %}
 </div>
 {% block javascripts %}

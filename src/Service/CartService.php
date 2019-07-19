@@ -25,7 +25,7 @@ class CartService
         $session->set('shopping_cart', $cart);
     }
 
-    public function getCartHeaderInfo()
+    public function getShoppingCartInfo()
     {
         $session = new Session();
         $cart = $session->get('shopping_cart');

@@ -1,4 +1,5 @@
 <header>
+    <notifications group="app" position="top center"></notifications>
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
@@ -52,7 +53,8 @@
                                 <div class="qty">0</div>
                             </a>
                         </div>
-                        {{ render(controller('App\\Controller\\CartController::getHeaderCartInfo')) }}
+{#                        {{ render(controller('App\\Controller\\CartController::getHeaderCartInfo')) }}#}
+                        <cart :cart="cart"></cart>
                         <div class="menu-toggle">
                             <a href="#">
                                 <i class="fa fa-bars"></i>

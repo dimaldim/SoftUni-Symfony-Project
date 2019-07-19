@@ -46,10 +46,7 @@
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn" data-product-id="{{ product.id }}"><i
-                                                        class="fa fa-shopping-cart"></i> add to
-                                                cart
-                                            </button>
+                                           <add-to-cart-btn v-on:addproduct="updateCart" :product="{{ product.id }}"></add-to-cart-btn>
                                         </div>
                                     </div>
                                 {% endfor %}
