@@ -44,6 +44,28 @@ class CartController extends AbstractController
     }
 
     /**
+     * @Route("/cart/remove/{id}")
+     * @return JsonResponse
+     */
+    public function removeFromCart($id)
+    {
+        $session = new Session();
+        $cart = $session->get('shopping_cart');
+
+        if ($cart === null) {
+            return new JsonResponse(['error' => 'No products in cart'], 500);
+        }
+
+        if (array_key_exists($id, $cart)) {
+            unset($cart[$id]);
+        }
+
+        $session->set('shopping_cart', $cart);
+
+        return $this->getShoppingCart();
+    }
+
+    /**
      * @Route("/cart/get")
      * @return JsonResponse
      */

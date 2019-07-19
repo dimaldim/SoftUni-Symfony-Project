@@ -53,8 +53,7 @@
                                 <div class="qty">0</div>
                             </a>
                         </div>
-{#                        {{ render(controller('App\\Controller\\CartController::getHeaderCartInfo')) }}#}
-                        <cart :cart="cart"></cart>
+                        <cart :cart="cart" v-on:removefromcart="removeItem"></cart> <!-- vueJS component !-->
                         <div class="menu-toggle">
                             <a href="#">
                                 <i class="fa fa-bars"></i>

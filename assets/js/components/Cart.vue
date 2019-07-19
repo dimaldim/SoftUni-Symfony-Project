@@ -17,7 +17,7 @@
                                 class="qty">{{ product.qty }}x</span>${{ formatPrice(product.price) }}
                         </h4>
                     </div>
-                    <button class="delete"><i class="fa fa-close"></i></button>
+                    <button class="delete" @click.prevent="removeItem(product.id)"><i class="fa fa-close"></i></button>
                 </div>
             </div>
             <div class="cart-summary">
@@ -41,6 +41,9 @@
       formatPrice(value) {
         let val = (value/1).toFixed(2).replace('.', ',')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      },
+      removeItem: function (id) {
+        this.$emit('removefromcart', id)
       }
     },
     name: "Cart"

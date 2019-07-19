@@ -1,95 +1,95 @@
 (function ($) {
   "use strict"
 
-  $('.add-to-cart-btn').click(function (e) {
-    e.preventDefault();
-    var productId = $(this).data('productId');
-    var qty = Number($('input[name="quantity"]').val()) || 1;
-    $.ajax({
-      method: "post",
-      url: "/cart/add/" + productId + "/" + qty,
-      success: (response) => {
-        var data = response.data;
-        var totalItems = 0;
-        var totalPrice = 0.00;
-        for (let [key, value] of Object.entries(data)) {
-          totalPrice += Number(data[key]['price']) * Number(data[key]['qty']);
-          totalItems += Number(data[key]['qty']);
-        }
-        //Update cart info
-        var cartProductCount = $('#header_cart_qty');
-        var cartListTotalAmount = $('#cart-summary-total');
-        var cartListTotalItems = $('#cart-summary-items');
-        var cartProductList = $('div.product-widget');
-
-        if (cartProductList.length === 0) {
-          $('.cart-list').append(
-            `<div class="product-widget" data-product-id="${productId}">
-                    <div class="product-img">
-                        <img src="${data[productId]['image']}" alt="">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-name"><a href="#">${data[productId]['productName']}</a></h3>
-                        <h4 class="product-price"><span
-                                    class="qty">${data[productId]['qty']}x</span>$${data[productId]['price'].toFixed(2)}
-                        </h4>
-                    </div>
-                    <button class="delete"><i class="fa fa-close"></i></button>
-                </div>`);
-        }
-
-        cartProductList.each(function () {
-          if (productId === $(this).data('productId')) {
-            $(this).find('.qty').html(data[productId]['qty'] + 'x');
-            return false;
-          } else {
-            $('.cart-list').append(
-              `<div class="product-widget" data-product-id="${productId}">
-                    <div class="product-img">
-                        <img src="${data[productId]['image']}" alt="">
-                    </div>
-                    <div class="product-body">
-                        <h3 class="product-name"><a href="#">${data[productId]['productName']}</a></h3>
-                        <h4 class="product-price"><span
-                                    class="qty">${data[productId]['qty']}x</span>$${data[productId]['price'].toFixed(2)}
-                        </h4>
-                    </div>
-                    <button class="delete"><i class="fa fa-close"></i></button>
-                </div>`);
-          }
-        });
-
-        cartListTotalItems.text(totalItems);
-        cartProductCount.html(totalItems);
-        cartListTotalAmount.text(totalPrice.toFixed(2));
-        $.notify({
-          title: "Success:",
-          message: "The product <b>" + data[productId]['productName'] + "</b> has been added to your shopping cart."
-        }, {
-          type: 'success',
-          animate:
-            {
-              enter: 'animated bounceIn',
-              exit: 'animated bounceOut'
-            }
-        });
-      },
-      error: (data) => {
-        $.notify({
-            title: "Warning:",
-            message: "Something went wrong! <b>" + data.responseJSON.error + "</b>"
-          }, {
-            type: 'danger',
-            animate:
-              {
-                enter: 'animated bounceIn',
-                exit: 'animated bounceOut'
-              }
-          }
-        );
-      }
-    })
-  });
+  // $('.add-to-cart-btn').click(function (e) {
+  //   e.preventDefault();
+  //   var productId = $(this).data('productId');
+  //   var qty = Number($('input[name="quantity"]').val()) || 1;
+  //   $.ajax({
+  //     method: "post",
+  //     url: "/cart/add/" + productId + "/" + qty,
+  //     success: (response) => {
+  //       var data = response.data;
+  //       var totalItems = 0;
+  //       var totalPrice = 0.00;
+  //       for (let [key, value] of Object.entries(data)) {
+  //         totalPrice += Number(data[key]['price']) * Number(data[key]['qty']);
+  //         totalItems += Number(data[key]['qty']);
+  //       }
+  //       //Update cart info
+  //       var cartProductCount = $('#header_cart_qty');
+  //       var cartListTotalAmount = $('#cart-summary-total');
+  //       var cartListTotalItems = $('#cart-summary-items');
+  //       var cartProductList = $('div.product-widget');
+  //
+  //       if (cartProductList.length === 0) {
+  //         $('.cart-list').append(
+  //           `<div class="product-widget" data-product-id="${productId}">
+  //                   <div class="product-img">
+  //                       <img src="${data[productId]['image']}" alt="">
+  //                   </div>
+  //                   <div class="product-body">
+  //                       <h3 class="product-name"><a href="#">${data[productId]['productName']}</a></h3>
+  //                       <h4 class="product-price"><span
+  //                                   class="qty">${data[productId]['qty']}x</span>$${data[productId]['price'].toFixed(2)}
+  //                       </h4>
+  //                   </div>
+  //                   <button class="delete"><i class="fa fa-close"></i></button>
+  //               </div>`);
+  //       }
+  //
+  //       cartProductList.each(function () {
+  //         if (productId === $(this).data('productId')) {
+  //           $(this).find('.qty').html(data[productId]['qty'] + 'x');
+  //           return false;
+  //         } else {
+  //           $('.cart-list').append(
+  //             `<div class="product-widget" data-product-id="${productId}">
+  //                   <div class="product-img">
+  //                       <img src="${data[productId]['image']}" alt="">
+  //                   </div>
+  //                   <div class="product-body">
+  //                       <h3 class="product-name"><a href="#">${data[productId]['productName']}</a></h3>
+  //                       <h4 class="product-price"><span
+  //                                   class="qty">${data[productId]['qty']}x</span>$${data[productId]['price'].toFixed(2)}
+  //                       </h4>
+  //                   </div>
+  //                   <button class="delete"><i class="fa fa-close"></i></button>
+  //               </div>`);
+  //         }
+  //       });
+  //
+  //       cartListTotalItems.text(totalItems);
+  //       cartProductCount.html(totalItems);
+  //       cartListTotalAmount.text(totalPrice.toFixed(2));
+  //       $.notify({
+  //         title: "Success:",
+  //         message: "The product <b>" + data[productId]['productName'] + "</b> has been added to your shopping cart."
+  //       }, {
+  //         type: 'success',
+  //         animate:
+  //           {
+  //             enter: 'animated bounceIn',
+  //             exit: 'animated bounceOut'
+  //           }
+  //       });
+  //     },
+  //     error: (data) => {
+  //       $.notify({
+  //           title: "Warning:",
+  //           message: "Something went wrong! <b>" + data.responseJSON.error + "</b>"
+  //         }, {
+  //           type: 'danger',
+  //           animate:
+  //             {
+  //               enter: 'animated bounceIn',
+  //               exit: 'animated bounceOut'
+  //             }
+  //         }
+  //       );
+  //     }
+  //   })
+  // });
 
 // Mobile Nav toggle
   $('.menu-toggle > a').on('click', function (e) {
@@ -257,54 +257,3 @@
 
 })
 (jQuery);
-
-//Vue JS
-import Vue from 'vue';
-
-import Cart from './components/Cart';
-import AddToCartBtn from './components/AddToCartBtn';
-
-
-import axios from 'axios';
-import VueSession from 'vue-session';
-import Notifications from 'vue-notification';
-
-Vue.use(VueSession);
-Vue.use(Notifications);
-
-Vue.config.productionTip = false;
-
-new Vue({
-  data: {
-    cart: {}
-  },
-  mounted() {
-    this.getCartInfo();
-  },
-  methods: {
-    getCartInfo() {
-      axios.get('/cart/get')
-        .then((response) => {
-          this.cart = response.data;
-        });
-    },
-    updateCart(data) {
-      axios.post('/cart/add/' + data.product + '/' + data.qty)
-        .then((response) => {
-          this.getCartInfo();
-          this.$notify({
-            group: 'app',
-            type: 'success',
-            animationType: 'css',
-            title: 'Done',
-            text: 'Your product has been added to your shopping cart.'
-          });
-        });
-    }
-  },
-  el: '#app',
-  components: {
-    Cart,
-    AddToCartBtn
-  }
-});
