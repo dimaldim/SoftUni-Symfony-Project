@@ -3,12 +3,32 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <div class="maincontent-area">
-        <div class="zigzag-bottom"></div>
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb" class="section">
+        <!-- container -->
         <div class="container">
+            <!-- row -->
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Registration form</h3>
+                    <h3 class="breadcrumb-header">Registration</h3>
+                    <ul class="breadcrumb-tree">
+                        <li><a href="{{ path('homepage') }}">Home</a></li>
+                        <li class="active">User regisration</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /BREADCRUMB -->
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-7">
                     {{ form_start(registrationForm) }}
                     <div class="form-group">
                         {{ form_row(registrationForm.email) }}
@@ -17,9 +37,18 @@
                         {{ form_row(registrationForm.plainPassword) }}
                     </div>
                     <div class="form-group">
-                        <button class="btn">Register</button>
+                        <button class="primary-btn order-submit">Register</button>
                     </div>
                     {{ form_end(registrationForm) }}
+                </div>
+                <div class="col-md-5">
+                    <div class="section-title text-center">
+                        <h3 class="title">Information</h3>
+                    </div>
+                    <div>
+                        Please provide valid e-mail address in order to receive actual information and confirm your
+                        account.
+                    </div>
                 </div>
             </div>
         </div>

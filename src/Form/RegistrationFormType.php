@@ -21,7 +21,7 @@ class RegistrationFormType extends AbstractType
                 EmailType::class,
                 [
                     'label' => 'Email:',
-                    'attr' => ['class' => 'form-control'],
+                    'attr' => ['class' => 'input', 'placeholder' => 'Your email address'],
                 ]
             )
             ->add(
@@ -30,7 +30,8 @@ class RegistrationFormType extends AbstractType
                 [
                     'label' => 'Password:',
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'input',
+                        'placeholder' => 'Your password',
                     ],
                     'mapped' => false,
                     'constraints' => [

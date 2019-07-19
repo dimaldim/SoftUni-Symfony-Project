@@ -3,13 +3,31 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-    <div class="maincontent-area">
-        <div class="zigzag-bottom"></div>
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb" class="section">
+        <!-- container -->
         <div class="container">
+            <!-- row -->
             <div class="row">
                 <div class="col-md-12">
-                    <p>Don't have an account? You can always register from <a href="{{ path('app_register') }}">here</a>
-                    </p>
+                    <h3 class="breadcrumb-header">Login</h3>
+                    <ul class="breadcrumb-tree">
+                        <li><a href="{{ path('homepage') }}">Home</a></li>
+                        <li class="active">Login</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /BREADCRUMB -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-7">
                     <form method="post">
                         {% if error %}
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -19,17 +37,15 @@
                             <div class="checkbox mb-3">You are logged in as {{ app.user.username }}, <a
                                         href="{{ path('app_logout') }}">Logout</a></div>
                         {% endif %}
-
-                        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                         <div class="form-group">
                             <label for="inputEmail" class="sr-only">Email</label>
                             <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
-                                   class="form-control"
+                                   class="input"
                                    placeholder="Email" required autofocus>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="sr-only">Password</label>
-                            <input type="password" name="password" id="inputPassword" class="form-control"
+                            <input type="password" name="password" id="inputPassword" class="input"
                                    placeholder="Password"
                                    required>
                         </div>
@@ -48,8 +64,16 @@
                             </div>
                         #}
 
-                        <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+                        <button class="primary-btn order-submit" type="submit">Sign in</button>
                     </form>
+                </div>
+                <div class="col-md-5">
+                    <div class="section-title text-center">
+                        <p>
+                            Don't have an account?
+                            You can always register from <a href="{{ path('app_register') }}">here</a>.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

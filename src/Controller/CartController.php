@@ -50,6 +50,7 @@ class CartController extends AbstractController
             [
                 'totalItems' => $this->cartService->getCartHeaderInfo()['totalItems'],
                 'totalPrice' => $this->cartService->getCartHeaderInfo()['totalPrice'],
+                'products' => $this->cartService->getCartHeaderInfo()['products'],
             ]
         );
     }

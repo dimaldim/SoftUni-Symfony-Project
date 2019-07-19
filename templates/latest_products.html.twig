@@ -1,25 +1,63 @@
-<div class="latest-product">
-    <h2 class="section-title">Latest Products</h2>
-    <div class="product-carousel">
-        {% for product in products %}
-            <div class="single-product">
-                <div class="product-f-image">
-                    <img src="{{ asset(product.img) }}" alt="">
-                    <div class="product-hover">
-                        <a href="#" class="add-to-cart-link" data-product-id="{{ product.id }}">
-                            <i class="fa fa-shopping-cart"></i> Add to cart</a>
-                        <a href="{{ path('view_product', {'slug': product.slug}) }}" class="view-details-link"><i
-                                    class="fa fa-link"></i> See details</a>
-                    </div>
-                </div>
-
-                <h2><a href="{{ path('view_product', {'slug': product.slug}) }}">{{ product.name }}</a></h2>
-
-                <div class="product-carousel-price">
-                    <ins>${{ product.price|number_format(2, '.', '') }}</ins>
-                    {#                    <del>$100.00</del>#}
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="title">New Products</h3>
                 </div>
             </div>
-        {% endfor %}
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="products-slick" data-nav="#slick-nav-1">
+                                {% for product in products %}
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="{{ asset(product.img) }}" alt="">
+                                            <div class="product-label">
+                                                {#                                            <span class="sale">-30%</span>#}
+                                                <span class="new">NEW</span>
+                                            </div>
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">{{ product.category }}</p>
+                                            <h3 class="product-name"><a
+                                                        href="{{ path('view_product', {'slug': product.slug}) }}">{{ product.name }}</a>
+                                            </h3>
+                                            <h4 class="product-price">${{ product.price|number_format(2,'.','') }}
+                                                {#                                                <del class="product-old-price">$990.00</del>#}
+                                            </h4>
+                                            {#                                            <div class="product-rating">#}
+                                            {#                                                <i class="fa fa-star"></i>#}
+                                            {#                                                <i class="fa fa-star"></i>#}
+                                            {#                                                <i class="fa fa-star"></i>#}
+                                            {#                                                <i class="fa fa-star"></i>#}
+                                            {#                                                <i class="fa fa-star"></i>#}
+                                            {#                                            </div>#}
+                                            <div class="product-btns">
+                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                            class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                            class="tooltipp">add to compare</span></button>
+                                                <button class="quick-view"><i class="fa fa-eye"></i><span
+                                                            class="tooltipp">quick view</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn" data-product-id="{{ product.id }}"><i
+                                                        class="fa fa-shopping-cart"></i> add to
+                                                cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div id="slick-nav-1" class="products-slick-nav"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>

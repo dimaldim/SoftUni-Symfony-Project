@@ -1,21 +1,23 @@
-<div class="col-md-8">
-    <div class="user-menu">
-        <ul>
-            {% if not app.user %}
-                <li>Welcome, Guest,</li>
-                <li><a href="{{ path('app_login') }}"><i class="fa fa-sign-in"></i> Login</a></li>
-                <li>or</li>
-                <li><a href="{{ path('app_register') }}"><i class="fa fa-plus"></i> Register</a></li>
-            {% else %}
-                <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
-                <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
-                <li><a href="#"><i class="fa fa-shopping-cart"></i> Checkout</a></li>
-                <li><a href="{{ path('app_logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
-                {% if app.user.isAdmin() %}
-                    <li><a href="{{ path('easyadmin') }}"><i class="fa fa-user"></i> Admin panel</a></li>
-                {% endif %}
-            {% endif %}
-        </ul>
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
+                <li><a href="#">Hot Deals</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Laptops</a></li>
+                <li><a href="#">Smartphones</a></li>
+                <li><a href="#">Cameras</a></li>
+                <li><a href="#">Accessories</a></li>
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
     </div>
-</div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->

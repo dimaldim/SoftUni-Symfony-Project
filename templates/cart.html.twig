@@ -1,7 +1,33 @@
-<div class="col-sm-6">
-    <div class="shopping-item">
-        <a href="cart.html">Cart - <span class="cart-amunt">${{ totalPrice|number_format(2, '.','') }}</span>
-            <i class="fa fa-shopping-cart"></i>
-            <span class="product-count">{{ totalItems }}</span></a>
+<div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+        <i class="fa fa-shopping-cart"></i>
+        <span>Your Cart</span>
+        <div id="header_cart_qty" class="qty">{{ totalItems }}</div>
+    </a>
+    <div class="cart-dropdown">
+        <div class="cart-list">
+            {% for product in products %}
+                <div class="product-widget" data-product-id="{{ product.id }}">
+                    <div class="product-img">
+                        <img src="{{ asset(product.image) }}" alt="">
+                    </div>
+                    <div class="product-body">
+                        <h3 class="product-name"><a href="#">{{ product.name }}</a></h3>
+                        <h4 class="product-price"><span
+                                    class="qty">{{ product.qty }}x</span>${{ product.price|number_format(2,'.','') }}
+                        </h4>
+                    </div>
+                    <button class="delete"><i class="fa fa-close"></i></button>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="cart-summary">
+            <small><span id="cart-summary-items">{{ totalItems }}</span> Item(s) selected</small>
+            <h5>SUBTOTAL: $<span id="cart-summary-total">{{ totalPrice|number_format(2,'.','') }}</span></h5>
+        </div>
+        <div class="cart-btns">
+            <a href="#">View Cart</a>
+            <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
     </div>
 </div>

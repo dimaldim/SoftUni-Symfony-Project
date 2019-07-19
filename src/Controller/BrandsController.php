@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BrandsController extends AbstractController
 {
-    public function getBrandsAction()
+    public function getBrands()
     {
         $repository = $this->getDoctrine()->getRepository(Brands::class);
         $brands = $repository->findAll();
