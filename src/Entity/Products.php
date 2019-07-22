@@ -63,6 +63,7 @@ class Products
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProductReviews", mappedBy="product")
+     * @ORM\OrderBy({"date" = "DESC"})
      */
     private $productReviews;
 
@@ -136,18 +137,6 @@ class Products
         return $this;
     }
 
-    public function getDateAdded(): ?\DateTimeInterface
-    {
-        return $this->dateAdded;
-    }
-
-    public function setDateAdded(\DateTimeInterface $dateAdded): self
-    {
-        $this->dateAdded = $dateAdded;
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -170,6 +159,18 @@ class Products
         }
     }
 
+    public function getDateAdded(): ?\DateTimeInterface
+    {
+        return $this->dateAdded;
+    }
+
+    public function setDateAdded(\DateTimeInterface $dateAdded): self
+    {
+        $this->dateAdded = $dateAdded;
+
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->name;
@@ -187,12 +188,36 @@ class Products
         return $this;
     }
 
+
+    public function getAvgProductReviews(): float
+    {
+        $productReviews = $this->getProductReviews();
+        $avgRating = 0.0;
+        foreach ($productReviews as $review) {
+            $avgRating += $review->getRating();
+        }
+        $avgRating = sprintf("%.2f", ($avgRating / count($productReviews)));
+
+        return $avgRating;
+    }
+
     /**
      * @return Collection|ProductReviews[]
      */
     public function getProductReviews(): Collection
     {
         return $this->productReviews;
+    }
+
+    public function getTotalRating($stars): float
+    {
+        return count(
+            $this->getProductReviews()->filter(
+                function (ProductReviews $productReviews) use ($stars) {
+                    return $productReviews->getRating() == $stars;
+                }
+            )
+        );
     }
 
     public function addProductReview(ProductReviews $productReview): self
