@@ -41,6 +41,11 @@ class ProductReviews
      */
     private $product;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $rating;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class ProductReviews
     public function setProduct(?Products $product): self
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }
