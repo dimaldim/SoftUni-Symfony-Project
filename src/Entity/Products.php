@@ -196,7 +196,7 @@ class Products
         foreach ($productReviews as $review) {
             $avgRating += $review->getRating();
         }
-        $avgRating = sprintf("%.2f", ($avgRating / count($productReviews)));
+        $avgRating = sprintf("%.2f", ($avgRating / max(count($productReviews), 1)));
 
         return $avgRating;
     }

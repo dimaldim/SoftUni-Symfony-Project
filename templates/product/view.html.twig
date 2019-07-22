@@ -177,7 +177,7 @@
                                                         <i class="fa fa-star"></i>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div style="width: {{ ((product.totalRating(5)/product.productReviews|length)*100)|round }}%;"></div>
+                                                        <div style="width: {{ ((product.totalRating(5)/max(product.productReviews|length, 1))*100)|round }}%;"></div>
                                                     </div>
                                                     <span class="sum">{{ product.totalRating(5) }}</span>
                                                 </li>
@@ -190,7 +190,7 @@
                                                         <i class="fa fa-star-o"></i>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div style="width: {{ ((product.totalRating(4)/product.productReviews|length)*100)|round }}%;"></div>
+                                                        <div style="width: {{ ((product.totalRating(4)/max(product.productReviews|length, 1))*100)|round }}%;"></div>
                                                     </div>
                                                     <span class="sum">{{ product.totalRating(4) }}</span>
                                                 </li>
@@ -203,7 +203,7 @@
                                                         <i class="fa fa-star-o"></i>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div style="width: {{ ((product.totalRating(3)/product.productReviews|length)*100)|round }}%"></div>
+                                                        <div style="width: {{ ((product.totalRating(3)/max(product.productReviews|length, 1))*100)|round }}%"></div>
                                                     </div>
                                                     <span class="sum">{{ product.totalRating(3) }}</span>
                                                 </li>
@@ -216,7 +216,7 @@
                                                         <i class="fa fa-star-o"></i>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div style="width: {{ ((product.totalRating(2)/product.productReviews|length)*100)|round }}%"></div>
+                                                        <div style="width: {{ ((product.totalRating(2)/max(product.productReviews|length, 1))*100)|round }}%"></div>
                                                     </div>
                                                     <span class="sum">{{ product.totalRating(2) }}</span>
                                                 </li>
@@ -229,7 +229,7 @@
                                                         <i class="fa fa-star-o"></i>
                                                     </div>
                                                     <div class="rating-progress">
-                                                        <div style="width: {{ ((product.totalRating(1)/product.productReviews|length)*100)|round }}%"></div>
+                                                        <div style="width: {{ ((product.totalRating(1)/max(product.productReviews|length, 1))*100)|round }}%"></div>
                                                     </div>
                                                     <span class="sum">{{ product.totalRating(1) }}</span>
                                                 </li>
