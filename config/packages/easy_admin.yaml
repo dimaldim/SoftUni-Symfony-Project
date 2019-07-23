@@ -2,6 +2,8 @@ easy_admin:
     design:
         menu:
             - { label: 'Shop Home', route: 'homepage', icon: 'home' }
+            - { label: 'Order management' }
+            - Orders
             - { label: 'User Management' }
             - { entity: 'Users', icon: 'user' }
             - { label: 'Inventory' }
@@ -13,6 +15,8 @@ easy_admin:
         display_name: true
     entities:
         # List the entity class name you want to manage
+        Orders:
+            class: App\Entity\Order
         Users:
             class: App\Entity\User
         Products:

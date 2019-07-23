@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use Carbon\Carbon;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductReviewsRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class ProductReviews
 {
@@ -18,6 +21,7 @@ class ProductReviews
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $customer;
 
@@ -28,11 +32,13 @@ class ProductReviews
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
      */
     private $text;
 
@@ -43,6 +49,7 @@ class ProductReviews
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank
      */
     private $rating;
 
@@ -121,5 +128,15 @@ class ProductReviews
         $this->rating = $rating;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function updateTimestamp()
+    {
+        if ($this->date === null) {
+            $this->setDate(Carbon::now());
+        }
     }
 }

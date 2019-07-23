@@ -67,9 +67,15 @@ class Products
      */
     private $productReviews;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductOrder", mappedBy="product")
+     */
+    private $productOrders;
+
     public function __construct()
     {
         $this->productReviews = new ArrayCollection();
+        $this->productOrders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -237,6 +243,37 @@ class Products
             // set the owning side to null (unless already changed)
             if ($productReview->getProduct() === $this) {
                 $productReview->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductOrder[]
+     */
+    public function getProductOrders(): Collection
+    {
+        return $this->productOrders;
+    }
+
+    public function addProductOrder(ProductOrder $productOrder): self
+    {
+        if (!$this->productOrders->contains($productOrder)) {
+            $this->productOrders[] = $productOrder;
+            $productOrder->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductOrder(ProductOrder $productOrder): self
+    {
+        if ($this->productOrders->contains($productOrder)) {
+            $this->productOrders->removeElement($productOrder);
+            // set the owning side to null (unless already changed)
+            if ($productOrder->getProduct() === $this) {
+                $productOrder->setProduct(null);
             }
         }
 
