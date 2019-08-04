@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @ApiResource
  * @ORM\Entity(repositoryClass="App\Repository\CategoriesRepository")
  */
 class Categories
@@ -27,6 +30,12 @@ class Categories
      * @ORM\OneToMany(targetEntity="App\Entity\Products", mappedBy="category")
      */
     private $products;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -88,4 +97,25 @@ class Categories
     {
         return $this->name;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     * @return Categories
+     */
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+
 }

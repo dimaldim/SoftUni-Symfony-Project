@@ -31,11 +31,15 @@ easy_admin:
                 fields: #['name', 'brand', 'category', 'price', 'description']
                     - name
                     - brand
+                    - img
                     - category
                     - price
                     - { property: 'description', type: 'text_editor' }
         Categories:
             class: App\Entity\Categories
+            form:
+                fields:
+                    - name
         Brands:
             class: App\Entity\Brands
             list:

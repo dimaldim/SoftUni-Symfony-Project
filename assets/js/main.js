@@ -1,6 +1,17 @@
 (function ($) {
   "use strict"
 
+  $('.add-to-cart-btn').click(function (e) {
+    var productId = $('.add-to-cart-btn').data('productId');
+    var qty = $('input[name=quantity]').val();
+    $.ajax({
+      url: '/cart/add/' + productId + '/' + qty,
+      method: 'post',
+      success: function () {
+        location.reload();
+      }
+    })
+  });
   // $('.add-to-cart-btn').click(function (e) {
   //   e.preventDefault();
   //   var productId = $(this).data('productId');
