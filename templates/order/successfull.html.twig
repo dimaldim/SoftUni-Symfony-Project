@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block body %}
+<div id="breadcrumb" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Checkout</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="{{ path('homepage') }}">Home</a></li>
+                    <li class="active">Successful checkout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Checkout finished</h3>
+                    <p style="margin-top: 15px;">Your order has been successfully placed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

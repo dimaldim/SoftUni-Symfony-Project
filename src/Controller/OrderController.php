@@ -24,9 +24,8 @@ class OrderController extends AbstractController
     /**
      * @Route("/checkout", name="checkout")
      */
-    public function checkout(Request $request)
+    public function checkout(Request $request, CartService $cartService)
     {
-        $session = new Session();
         $cart = $this->cartService->getShoppingCartInfo();
 
         $order = new Order();
@@ -49,6 +48,15 @@ class OrderController extends AbstractController
                 $em->persist($productOrder);
             }
             $em->flush();
+            $cartService->resetCart();
+
+									return $this->render(
+									'order/successfull.html.twig',
+									[
+									'cart' => $cart,
+									'form' => $form->createView(),
+									]
+									);
         }
 
         return $this->render(

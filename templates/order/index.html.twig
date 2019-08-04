@@ -23,91 +23,96 @@
                 <div class="billing-details">
                     <div class="section-title">
                         <h3 class="title">Billing & Shipping address</h3>
+                        {% if not app.user %}
+                            <p><small style="color: red;font-weight: bold;">
+                                    Your order will be placed as anonymous. You can login or register if you want.
+                                </small></p>
+                        {% endif %}
                     </div>
                     {{ form_start(form) }}
                     {{ form_errors(form) }}
-                        <div class="form-group">
-                            {{ form_row(form.firstName) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.lastName) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.email) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.address) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.city) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.country) }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_row(form.telephone) }}
-                        </div>
-                        {#                        <div class="form-group">#}
-                        {#                            <div class="input-checkbox">#}
-                        {#                                <input type="checkbox" id="create-account">#}
-                        {#                                <label for="create-account">#}
-                        {#                                    <span></span>#}
-                        {#                                    Create Account?#}
-                        {#                                </label>#}
-                        {#                                <div class="caption">#}
-                        {#                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
-                        {#                                        incididunt.</p>#}
-                        {#                                    <input class="input" type="password" name="password"#}
-                        {#                                           placeholder="Enter Your Password">#}
-                        {#                                </div>#}
-                        {#                            </div>#}
-                        {#                        </div>#}
-                        <div class="order-notes">
-                            {{ form_row(form.notes) }}
-                        </div>
-                        <div class="payment-method">
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-1">
-                                <label for="payment-1">
-                                    <span></span>
-                                    Direct Bank Transfer
-                                </label>
-                                <div class="caption">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-2">
-                                <label for="payment-2">
-                                    <span></span>
-                                    Cheque Payment
-                                </label>
-                                <div class="caption">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-3">
-                                <label for="payment-3">
-                                    <span></span>
-                                    Paypal System
-                                </label>
-                                <div class="caption">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="terms">
-                            <label for="terms">
-                                <span></span>
-                                I've read and accept the <a href="#">terms & conditions</a>
-                            </label>
-                        </div>
-                        <button type="submit" class="primary-btn order-submit">Place order</button>
+                    <div class="form-group">
+                        {{ form_row(form.firstName) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.lastName) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.email) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.address) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.city) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.country) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.telephone) }}
+                    </div>
+                    {#                        <div class="form-group">#}
+                    {#                            <div class="input-checkbox">#}
+                    {#                                <input type="checkbox" id="create-account">#}
+                    {#                                <label for="create-account">#}
+                    {#                                    <span></span>#}
+                    {#                                    Create Account?#}
+                    {#                                </label>#}
+                    {#                                <div class="caption">#}
+                    {#                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+                    {#                                        incididunt.</p>#}
+                    {#                                    <input class="input" type="password" name="password"#}
+                    {#                                           placeholder="Enter Your Password">#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    <div class="order-notes">
+                        {{ form_row(form.notes) }}
+                    </div>
+                    {#                        <div class="payment-method">#}
+                    {#                            <div class="input-radio">#}
+                    {#                                <input type="radio" name="payment" id="payment-1">#}
+                    {#                                <label for="payment-1">#}
+                    {#                                    <span></span>#}
+                    {#                                    Direct Bank Transfer#}
+                    {#                                </label>#}
+                    {#                                <div class="caption">#}
+                    {#                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+                    {#                                        incididunt ut labore et dolore magna aliqua.</p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="input-radio">#}
+                    {#                                <input type="radio" name="payment" id="payment-2">#}
+                    {#                                <label for="payment-2">#}
+                    {#                                    <span></span>#}
+                    {#                                    Cheque Payment#}
+                    {#                                </label>#}
+                    {#                                <div class="caption">#}
+                    {#                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+                    {#                                        incididunt ut labore et dolore magna aliqua.</p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="input-radio">#}
+                    {#                                <input type="radio" name="payment" id="payment-3">#}
+                    {#                                <label for="payment-3">#}
+                    {#                                    <span></span>#}
+                    {#                                    Paypal System#}
+                    {#                                </label>#}
+                    {#                                <div class="caption">#}
+                    {#                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor#}
+                    {#                                        incididunt ut labore et dolore magna aliqua.</p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                        <div class="input-checkbox">#}
+                    {#                            <input type="checkbox" id="terms">#}
+                    {#                            <label for="terms">#}
+                    {#                                <span></span>#}
+                    {#                                I've read and accept the <a href="#">terms & conditions</a>#}
+                    {#                            </label>#}
+                    {#                        </div>#}
+                    <button type="submit" class="primary-btn order-submit">Place order</button>
                     {{ form_end(form) }}
                 </div>
                 {#                    <div class="shiping-details">#}

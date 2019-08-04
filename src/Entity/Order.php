@@ -59,7 +59,7 @@ class Order
     private $telephone;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductOrder", mappedBy="checkout")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductOrder", mappedBy="checkout", cascade={"remove"})
      */
     private $productOrders;
 
