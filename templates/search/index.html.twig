@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="breadcrumb" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb-tree">
+                        <li><a href="{{ path('homepage') }}">Home</a></li>
+                        <li>Search</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                {% if keyword is empty %}
+                    <div class="alert alert-danger">Please enter a keyword.</div>
+                {% else %}
+                <div id="store" class="col-md-9">
+{#                    <div class="store-filter clearfix">#}
+{#                        <div class="store-sort">#}
+{#                            <label>#}
+{#                                Sort By:#}
+{#                                <select class="input-select">#}
+{#                                    <option value="0">Popular</option>#}
+{#                                    <option value="1">Position</option>#}
+{#                                </select>#}
+{#                            </label>#}
+
+{#                            <label>#}
+{#                                Show:#}
+{#                                <select class="input-select">#}
+{#                                    <option value="0">20</option>#}
+{#                                    <option value="1">50</option>#}
+{#                                </select>#}
+{#                            </label>#}
+{#                        </div>#}
+{#                        #}{#                        <ul class="store-grid">#}
+{#                        #}{#                            <li class="active"><i class="fa fa-th"></i></li>#}
+{#                        #}{#                            <li><a href="#"><i class="fa fa-th-list"></i></a></li>#}
+{#                        #}{#                        </ul>#}
+{#                    </div>#}
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-md-4 col-xs-6">
+                                <div class="product">
+                                    <div class="product-img">
+                                        <img src="{{ product.img }}" alt="">
+                                        <div class="product-label">
+                                            {#                                        <span class="sale">-30%</span>#}
+                                            {#                                        <span class="new">NEW</span>#}
+                                        </div>
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category">{{ product.category.name }}</p>
+                                        <h3 class="product-name"><a
+                                                    href="{{ path('view_product', {'slug': product.slug}) }}">{{ product.name }}</a>
+                                        </h3>
+                                        <h4 class="product-price">${{ product.price|number_format(2,'.','') }}
+                                            {#                                        <del class="product-old-price">$990.00</del>#}
+                                        </h4>
+                                        <div class="product-rating">
+                                            {% for i in 1..5 %}
+                                                {% if i <= product.avgProductReviews %}
+                                                    <i class="fa fa-star"></i>
+                                                {% else %}
+                                                    <i class="fa fa-star-o"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="product-btns">
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                        class="tooltipp">add to wishlist</span></button>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <add-to-cart-btn v-on:addproduct="updateCart"
+                                                         :product="{{ product.id }}"></add-to-cart-btn>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
