@@ -28,6 +28,7 @@ class Categories
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Products", mappedBy="category")
+     * @ORM\OrderBy({"id" = "DESC"})
      */
     private $products;
 
