@@ -19,6 +19,9 @@
 <div class="section">
     <div class="container">
         <div class="row">
+            {% if cart.products is empty %}
+            <div class="alert alert-danger">Your cart is empty, you cannot proceed to checkout!</div>
+            {% else %}
             <div class="col-md-7">
                 <div class="billing-details">
                     <div class="section-title">
@@ -182,6 +185,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
     {% endblock %}
