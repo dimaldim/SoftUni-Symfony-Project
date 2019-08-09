@@ -12,7 +12,7 @@
                     {% if app.user.isAdmin() %}
                         <li><a href="{{ path('easyadmin') }}"><i class="fa fa-user"></i> Admin panel</a></li>
                     {% endif %}
-                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                    {#                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>#}
                     <li><a href="{{ path('app_logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
                 {% else %}
                     <li><a href="{{ path('app_login') }}"><i class="fa fa-sign-in"></i> Login</a></li>
